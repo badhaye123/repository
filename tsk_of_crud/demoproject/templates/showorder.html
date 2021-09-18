@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Show Order</title>
+{% endblock %}
+
+{% block content %}
+   <table class="table table-dark">
+         <tr>
+             <th>lapmodelname</th>
+             <th>lapcompanyname</th>
+             <th>ram</th>
+             <th>rom</th>
+             <th>weight</th>
+             <th>processor</th>
+             <th>Mode of payment</th>
+         </tr>
+        {% for laptop in lap %}
+         <tr>
+             <td>{{laptop.lapmodelname}}</td>
+             <td>{{laptop.lapcompanyname}}</td>
+             <td>{{laptop.ram}}</td>
+             <td>{{laptop.rom}}</td>
+             <td>{{laptop.weight}}</td>
+             <td>{{laptop.processor}}</td>
+
+             {% if laptop.is_paid %}
+                <td>Prepaid</td>
+             {% else%}
+                <td>COD</td>
+             {% endif %}
+
+             <td>
+                 <a href="{% url 'updateorder' %}">
+                     <button class="btn btn-warning">
+                         Update
+                     </button>
+                 </a>
+             </td>
+             <td><a href="{% url 'deleteorder' %}"><button class="btn btn-danger">Delete</button></a></td>
+          </tr>
+        {% endfor %}
+        
+
+     </table>
+     <br>
+     <a href="{% url 'addorder' %}">
+         <button class="btn btn-success">Add Order</button>
+     </a>
+{% endblock %}
